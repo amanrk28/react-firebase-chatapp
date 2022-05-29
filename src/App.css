@@ -77,6 +77,10 @@ form button {
   width: 25%;
   border-radius: 8px 0 0 8px;
   background-color: #9C33C1;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 input {
@@ -92,7 +96,7 @@ input {
 button {
   border: none;
   color: white;
-  padding: 12px 5%;
+  padding: 2% 5%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -102,8 +106,10 @@ button {
 }
 
 .signIn-btn {
-  width: 50%;
+  max-width: 250px;
+  width: 100%;
   margin: auto;
+  background-color: #4285F4;
 }
 
 .signOut-btn {
