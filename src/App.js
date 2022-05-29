@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import "./App.css";
+import logoutIcon from "./logout.png";
+import sendIcon from "./send.png";
 
 firebase.initializeApp({
   apiKey: "AIzaSyDMDc2UIvSqGKekkhgvmKuHCHLtLdfi2S4",
@@ -19,12 +21,19 @@ firebase.initializeApp({
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
+const messagePlaceholders = [
+  "What's on your mind...",
+  "Message...",
+  "Type Something...",
+  "Say something nice...",
+];
+
 function App() {
   const [user] = useAuthState(auth);
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Chat Away</h1>
+        <h1>💬 Chat Away</h1>
         <SignOut />
       </header>
       <section>{user ? <ChatRoom /> : <SignIn />}</section>
@@ -38,26 +47,38 @@ function SignIn() {
     auth.signInWithPopup(provider);
   };
 
-  return <button onClick={signInWithGoogle}>Sign in with Google</button>;
+  return (
+    <button className="signIn-btn" onClick={signInWithGoogle}>
+      Sign in with Google
+    </button>
+  );
 }
 
 function SignOut() {
   return (
     auth.currentUser && (
-      <button onClick={() => auth.signOut()} className="signOut-btn">
-        Sign Out
+      <button
+        onClick={() => auth.signOut()}
+        className="signOut-btn"
+        title="Sign Out"
+      >
+        <img src={logoutIcon} alt="Sign Out" />
       </button>
     )
   );
 }
 
 function ChatRoom() {
-  const dummy = useRef();
+  const messageEndRef = useRef();
 
   const messageRef = firestore.collection("messages");
   const query = messageRef.orderBy("createdAt").limit(25);
   const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
+
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behaviour: "smooth" });
+  }, [messages]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -69,7 +90,7 @@ function ChatRoom() {
       photoURL,
     });
     setFormValue("");
-    dummy.current.scrollIntoView({ behaviour: "smooth" });
+    messageEndRef.current.scrollIntoView({ behaviour: "smooth" });
   };
 
   return (
@@ -77,15 +98,22 @@ function ChatRoom() {
       <main>
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
-        <div ref={dummy}></div>
+        <div ref={messageEndRef} />
       </main>
       <form onSubmit={sendMessage}>
         <input
-          placeholder="say somthing nice"
+          placeholder={
+            messagePlaceholders[
+              Math.floor(Math.random() * messagePlaceholders.length)
+            ]
+          }
+          autoFocus
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
         />
-        <button type="submit">Send</button>
+        <button type="submit">
+          <img src={sendIcon} alt="Send" />
+        </button>
       </form>
     </>
   );
