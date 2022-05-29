@@ -1,0 +1,64 @@
+main {
+  padding: 10px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  margin-bottom: 6vh;
+}
+
+main::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+main::-webkit-scrollbar-track {
+  background: #181717;
+  border-radius: 10px;
+}
+
+main::-webkit-scrollbar-thumb {
+  background: #1e1e24;
+  border-radius: 10px;
+}
+
+form {
+  height: 6vh;
+  position: fixed;
+  bottom: 5px;
+  left: 1%;
+  background-color: rgb(58, 58, 58);
+  width: 98%;
+  max-width: 728px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  font-size: 1.5rem;
+  border-radius: 50px;
+}
+
+input {
+  width: 100%;
+  font-size: 1.2rem;
+  background: rgb(58, 58, 58);
+  color: white;
+  outline: none;
+  border: none;
+  padding: 0 20px;
+  border-radius: 50px;
+}
+
+form button {
+  width: 45px;
+  height: 45px;
+  margin: 8px 8px;
+  border-radius: 50%;
+  background-color: #9c33c1;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form button img {
+  transform: scale(0.7);
+}
