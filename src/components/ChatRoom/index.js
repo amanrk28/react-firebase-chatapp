@@ -17,7 +17,7 @@ export function ChatRoom() {
   const messageEndRef = useRef();
 
   const messageRef = firestore.collection("messages");
-  const query = messageRef.orderBy("createdAt").limit(25);
+  const query = messageRef.orderBy("createdAt").limit(100);
   const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
 
@@ -27,6 +27,7 @@ export function ChatRoom() {
 
   const sendMessage = async (e) => {
     e.preventDefault();
+    if (formValue === "") return;
     const { uid, photoURL } = auth.currentUser;
     await messageRef.add({
       text: formValue,
@@ -45,21 +46,23 @@ export function ChatRoom() {
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
         <div ref={messageEndRef} />
       </main>
-      <form onSubmit={sendMessage}>
-        <input
-          placeholder={
-            messagePlaceholders[
-              Math.floor(Math.random() * messagePlaceholders.length)
-            ]
-          }
-          autoFocus
-          value={formValue}
-          onChange={(e) => setFormValue(e.target.value)}
-        />
-        <button type="submit">
-          <img src={sendIcon} alt="Send" />
-        </button>
-      </form>
+      <div className="input-container">
+        <form onSubmit={sendMessage}>
+          <input
+            placeholder={
+              messagePlaceholders[
+                Math.floor(Math.random() * messagePlaceholders.length)
+              ]
+            }
+            autoFocus
+            value={formValue}
+            onChange={(e) => setFormValue(e.target.value)}
+          />
+          <button type="submit">
+            <img src={sendIcon} alt="Send" />
+          </button>
+        </form>
+      </div>
     </>
   );
 }

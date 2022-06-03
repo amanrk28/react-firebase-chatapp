@@ -4,7 +4,6 @@ main {
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  margin-bottom: 6vh;
 }
 
 main::-webkit-scrollbar {
@@ -21,14 +20,16 @@ main::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
+.input-container {
+  padding: 5px 10px;
+}
+
 form {
-  height: 6vh;
-  position: fixed;
-  bottom: 5px;
-  left: 1%;
-  background-color: rgb(58, 58, 58);
-  width: 98%;
+  position: relative;
+  height: 48px;
+  width: 100%;
   max-width: 728px;
+  background-color: rgb(58, 58, 58);
   display: flex;
   justify-content: center;
   margin: auto;
@@ -48,9 +49,11 @@ input {
 }
 
 form button {
-  width: 45px;
-  height: 45px;
-  margin: 8px 8px;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  right: 6px;
+  top: 7px;
   border-radius: 50%;
   background-color: #9c33c1;
   padding: 0;
