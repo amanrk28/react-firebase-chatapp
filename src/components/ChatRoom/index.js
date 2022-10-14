@@ -17,7 +17,7 @@ export function ChatRoom() {
   const messageEndRef = useRef();
 
   const messageRef = firestore.collection("messages");
-  const query = messageRef.orderBy("createdAt").limit(100);
+  const query = messageRef.orderBy("createdAt").limit(1000);
   const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
 
@@ -51,7 +51,7 @@ export function ChatRoom() {
           <input
             placeholder={
               messagePlaceholders[
-                Math.floor(Math.random() * messagePlaceholders.length)
+              Math.floor(Math.random() * messagePlaceholders.length)
               ]
             }
             autoFocus

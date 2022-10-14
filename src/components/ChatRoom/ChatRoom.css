@@ -52,10 +52,10 @@ form button {
   width: 35px;
   height: 35px;
   position: absolute;
-  right: 6px;
+  right: 12px;
   top: 7px;
   border-radius: 50%;
-  background-color: #9c33c1;
+  background-color: transparent;
   padding: 0;
   display: flex;
   justify-content: center;

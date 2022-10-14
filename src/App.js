@@ -5,16 +5,17 @@ import "./App.css";
 import logoutIcon from "./logout.png";
 import { ChatRoom } from "./components/ChatRoom";
 import { auth } from "./firebase";
+import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 
 function App() {
   const [user] = useAuthState(auth);
   return (
     <div className="App">
       <header className="App-header">
-        <h1>💬 Chat Away</h1>
-        <SignOut />
+        <h1><img src="/chat.png" alt="BasChat" /> Chat Away</h1>
+        {user && <SignOut />}
       </header>
-      <section>{user ? <ChatRoom /> : <SignIn />}</section>
+      <section>{auth.currentUser ? <ChatRoom /> : <SignIn />}</section>
     </div>
   );
 }
@@ -24,25 +25,28 @@ function SignIn() {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
   };
+  const signInWithFacebook = () => {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    auth.signInWithPopup(provider);
+  }
 
   return (
-    <button className="signIn-btn" onClick={signInWithGoogle}>
-      Sign in with Google
-    </button>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <GoogleLoginButton align="center" iconSize="32px" onClick={signInWithGoogle} style={{ maxWidth: 350, margin: '8px auto' }} />
+      <FacebookLoginButton align="center" onClick={signInWithFacebook} style={{ maxWidth: 350, margin: 'px auto' }} />
+    </div>
   );
 }
 
 function SignOut() {
   return (
-    auth.currentUser && (
-      <button
-        onClick={() => auth.signOut()}
-        className="signOut-btn"
-        title="Sign Out"
-      >
-        <img src={logoutIcon} alt="Sign Out" />
-      </button>
-    )
+    <button
+      onClick={() => auth.signOut()}
+      className="signOut-btn"
+      title="Sign Out"
+    >
+      <img src={logoutIcon} alt="Sign Out" />
+    </button>
   );
 }
 
