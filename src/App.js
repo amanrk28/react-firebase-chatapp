@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1><img src="/chat.png" alt="BasChat" /> Chat Away</h1>
+        <img src="/textr.png" alt="textr" className="logo" />
         {user && <SignOut />}
       </header>
       <section>{auth.currentUser ? <ChatRoom /> : <SignIn />}</section>

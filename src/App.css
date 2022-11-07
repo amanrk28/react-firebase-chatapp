@@ -13,9 +13,7 @@ body {
 }
 
 .App header {
-  background-color: #181717;
-  height: 8vh;
-  min-height: 50px;
+  background-color: #1b1b1b;
   color: white;
   width: 100%;
   max-width: 728px;
@@ -25,20 +23,21 @@ body {
   z-index: 99;
   padding: 10px;
   box-sizing: border-box;
+  border-bottom: 1px solid rgba(256, 256, 256, 0.5);
 }
-.App header h1 {
-  display: flex;
-  align-items: center;
+
+.App-header .logo {
+  width: 200px;
+  height: auto;
+  border-radius: 0;
 }
 
 .App section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 92vh;
-  backdrop-filter: blur(14px) saturate(200%);
-  -webkit-backdrop-filter: blur(14px) saturate(200%);
-  background-color: rgba(255, 255, 255, 0.35);
+  height: 89vh;
+  background-color: #1b1b1b;
 }
 
 button {
@@ -61,9 +60,13 @@ button {
 }
 
 .signOut-btn {
-  padding: 8px;
-  background-color: rgba(226, 6, 6, 0.882);
-  transform: scale(0.7);
+  padding: 4px;
+  background: transparent;
+}
+.signOut-btn img {
+  width: 60px;
+  height: auto;
+  margin: 0;
 }
 
 button:disabled {

@@ -1,6 +1,6 @@
 {
-  "name": "superchat",
-  "version": "1.0.1",
+  "name": "textr",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
     "firebase": "^9.12.1",
